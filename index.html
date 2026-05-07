@@ -1,351 +1,131 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en" class="ua-Edge no-touch">
 <head>
+    <title>Radio fouedb Music</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Encoding and viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Radio fouedb Music</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/favicon.ico" type="image/x-icon">
+
+    <!-- SEO -->
+    <meta name="description" content="Radio fouedb Music Webplayer">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Radio fouedb Music">
+    <meta property="og:description" content="Web player">
+    <meta property="og:type" content="music.radio_station">
+    <meta property="og:url" content="https://fouedb-support.github.io/RfbM-2?l=">
+
+    <!-- Preconnection and DNS Prefetch to speed up -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://player.live365.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://player.live365.com">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700&display=swap">
+    <link rel="stylesheet" href="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/base-round-trip-rfbm-2.css?4.6.12">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    
+    <!-- Scripts (Order preserved) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/jquery.jplayer292ed.min.js" id="jpjs"></script>
+    <script defer src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/modernizr-custom.js"></script>
+    
+    <!-- Global variables -->
+    <script>
+    // Centralized object
+    window.config = {
+      page: 0,
+      lang_text: {},
+      Chrome: 138,
+      iPadOS: 0,
+      cfg_id: "",
+      minadw: () => 985
+    };
+
+    // Compatibility with legacy code that uses global variables
+    window.page = window.config.page;
+    window.lang_text = window.config.lang_text;
+    window.Chrome = window.config.Chrome;
+    window.iPadOS = window.config.iPadOS;
+    window.cfg_id = window.config.cfg_id;
+    window.minadw = window.config.minadw;
+    </script>
+    
+    <!-- Centralized script -->
+    <script defer src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/scripts-round-trip-rfbm-2.js"></script>   
+
+    <!-- Main script (modules) -->
+    <script module src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/site.4.6.12.js"></script>    
+    <script module src='https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/viblast.0.0.62.js'></script>
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8GJ6SY3VC"></script>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#111;
-color:white;
-}
-
-/* PLAYER */
-
-.radio-player{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:130px;
-overflow:hidden;
-}
-
-/* BACKGROUND */
-
-.playerbg{
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
-width:100%;
-height:100%;
-background-image:url(https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/rfbm-background_37.png);
-background-position:center;
-background-size:cover;
-filter:blur(2px);
-}
-
-/* CONTENT */
-
-.player-content{
-position:relative;
-display:flex;
-align-items:center;
-gap:15px;
-padding:15px;
-}
-
-/* COVER */
-
-.album-art{
-position:relative;
-}
-
-.album-art img{
-width:75px;
-height:75px;
-border-radius:50%;
-animation:spin 20s linear infinite;
-object-fit:cover;
-}
-
-/* COVER ROTATION */
-
-@keyframes spin{
-0%{transform:rotate(0)}
-100%{transform:rotate(360deg)}
-}
-
-/* CONTROLS */
-
-.controls{
-display:flex;
-flex-direction:column;
-gap:6px;
-}
-
-button{
-background:#ff2a2a;
-border:none;
-color:white;
-padding:6px 10px;
-cursor:pointer;
-border-radius:4px;
-}
-
-#volume{
-width:90px;
-}
-
-/* SONG */
-
-.song-info{
-flex:1;
-overflow:hidden;
-}
-
-.song{
-font-size:16px;
-white-space:nowrap;
-overflow:hidden;
-}
-
-.scroll{
-animation:scroll 12s linear infinite;
-}
-
-.artist{
-font-size:14px;
-opacity:0.8;
-}
-
-/* SCROLL TEXT */
-
-@keyframes scroll{
-0%{transform:translateX(100%)}
-100%{transform:translateX(-100%)}
-}
-
-/* EQUALIZER */
-
-.equalizer{
-display:flex;
-gap:3px;
-align-items:flex-end;
-height:20px;
-}
-
-.bar{
-width:3px;
-background:#00ffcc;
-height:4px;
-}
-
-/* animation active seulement quand player joue */
-
-.playing .bar{
-animation:equalize 1s infinite ease-in-out;
-}
-
-.bar:nth-child(2){animation-delay:.2s}
-.bar:nth-child(3){animation-delay:.4s}
-.bar:nth-child(4){animation-delay:.6s}
-
-@keyframes equalize{
-0%{height:4px}
-50%{height:18px}
-100%{height:4px}
-}
-
-/* HISTORY */
-
-.history{
-position:absolute;
-bottom:130px;
-left:0;
-width:100%;
-background:#000;
-padding:10px;
-font-size:13px;
-}
-
-.history div{
-padding:2px 0;
-}
-
+.header img { margin-top: -14px; max-height:52px }
+body.page,
+body.page .container::before { background-color: #e0e0e0 }
 </style>
 
 </head>
 
 <body>
-
-<div class="radio-player">
-
-<div class="playerbg"></div>
-
-<div class="player-content">
-
-<div class="album-art">
-
-<img id="cover"
-src="https://player.live365.com/configs/images/noalbum-white.png">
-
-</div>
-
-<div class="controls">
-
-<button id="play">Play</button>
-
-<input id="volume" type="range" min="0" max="1" step="0.05" value="1">
-
-<div id="equalizer" class="equalizer">
-
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-
-</div>
-
-</div>
-
-<div class="song-info">
-
-<div id="title" class="song">Loading...</div>
-
-<div id="artist" class="artist"></div>
-
-</div>
-
-</div>
-
-<div id="history" class="history"></div>
-
-</div>
-
-<audio id="radio" preload="none">
-
-<source src="https://streaming.live365.com/a82574_2" type="audio/aac">
-
-</audio>
-
-<script>
-
-/* AUDIO */
-
-var radio=document.getElementById("radio");
-var play=document.getElementById("play");
-var volume=document.getElementById("volume");
-var eq=document.getElementById("equalizer");
-
-play.onclick=function(){
-
-if(radio.paused){
-
-radio.play();
-play.innerText="Pause";
-eq.classList.add("playing");
-
-}else{
-
-radio.pause();
-play.innerText="Play";
-eq.classList.remove("playing");
-
-}
-
-}
-
-volume.oninput=function(){
-radio.volume=this.value;
-}
-
-/* METADATA */
-
-var last="";
-
-async function metadata(){
-
-try{
-
-let r=await fetch("http://rfbm.atwebpages.com/metadata.php");
-
-let j=await r.json();
-
-let artist=j.artist || "";
-let title=j.title || "";
-
-let full=artist+" - "+title;
-
-if(full!==last){
-
-last=full;
-
-document.getElementById("artist").textContent=artist;
-
-let titleElem=document.getElementById("title");
-
-titleElem.textContent=title;
-
-/* scroll */
-
-if(title.length>25){
-
-titleElem.classList.add("scroll");
-
-}else{
-
-titleElem.classList.remove("scroll");
-
-}
-
-/* HISTORY */
-
-var h=document.getElementById("history");
-
-var item=document.createElement("div");
-
-item.textContent=full;
-
-h.prepend(item);
-
-if(h.children.length>5){
-
-h.removeChild(h.lastChild);
-
-}
-
-/* COVER (itunes) */
-
-let search=encodeURIComponent(artist+" "+title);
-
-fetch("https://itunes.apple.com/search?term="+search+"&limit=1")
-
-.then(r=>r.json())
-
-.then(data=>{
-
-if(data.results.length){
-
-let img=data.results[0].artworkUrl100;
-
-img=img.replace("100x100","400x400");
-
-document.getElementById("cover").src=img;
-
-}
-
-});
-
-}
-
-}catch(e){}
-
-}
-
-setInterval(metadata,10000);
-
-metadata();
-
-</script>
+   <div id="blurdiv"></div>
+   <div id="container">
+   <div id="jpdivmp3" class="jp-jplayer"></div>
+   <div id="jpdivm4a" class="jp-jplayer"></div>
+   <div id="jpdivaac" class="jp-jplayer"></div>
+   <div id="jw1" class="jp-jplayer"></div>
+   <div class="playerbg themebg" style=""></div>
+   <div class="player">
+   <div class="playerbg"></div>
+   <div class="player-content">
+
+   <div class="album-art">
+       <img class="songimg" src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/noalbum-white.png" />
+          
+   <div id="debug">
+   </div>
+   </div>
+        
+    <div class="controls">
+    <div class="top-row">
+        <button id="play">▶️</button>
+    <div id="equalizer" class="equalizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    </div>
+
+    <div class="bottom-row">
+    <div id="mute"><i class="fas fa-volume-up"></i></div>
+    <input type="range" id="volume" min="0" max="1" step="0.05" value="1">
+    </div>
+    </div>
+    
+    <div class="song-info notrated">
+        <h1 id="song" class="song titlecolor"></h1>
+        <h2 id="artist" class="artist"></h2>
+    </div>    
+    </div>
+    <!--<div id="history" class="history"></div>-->
+    </div></div>
+
+    <audio id="radio" autoplay preload="none" controls>
+        <source src="https://streaming.live365.com/a82574_2" type="audio/aac">
+    </audio>
+
+    <div id="text" class="radio-name">Radio fouedb Music</div>
 
 </body>
 </html>
