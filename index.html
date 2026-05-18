@@ -59,7 +59,7 @@
     </script>
     
     <!-- Centralized script -->
-    <script defer src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/scripts-round-trip-rfbm-2.js"></script>    
+    <script defer src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/scripts-round-trip-rfbm-2.js"></script>   
 
     <!-- Main script (modules) -->
     <script module src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/site.4.6.12.js"></script>    
@@ -87,19 +87,24 @@ body.page .container::before { background-color: #e0e0e0 }
         <button id="autoHideToggle" class="auto-hide-btn active"></button>    
     <div class="player">
     <div class="playerbg"></div>
+
     <div class="player-content">
 
+    <!-- ===== 1st line ===== -->
+    <div class="top-controls">
+
+    <!-- Album -->
     <div class="album-art">
         <img class="songimg" src="https://radiofouedbmusic.weebly.com/uploads/2/7/3/9/27392993/noalbum-white.png" />
-          
-    <div id="debug">
+    <div id="debug"></div>
     </div>
-    </div>
-        
-    <div class="controls">
-    <div class="top-row">
+
+    <!-- Play -->
         <button id="play">▶️</button>
+
         <audio id="radio" autoplay preload="none" playsinline></audio>
+
+    <!-- Equalizer -->
     <div id="equalizer" class="equalizer">
     <div class="bar"></div>
     <div class="bar"></div>
@@ -107,29 +112,46 @@ body.page .container::before { background-color: #e0e0e0 }
     <div class="bar"></div>
     <div class="bar"></div>
     </div>
+
+    <!-- Mute -->
+    <div id="mute">
+        <i class="fas fa-volume-up"></i>
     </div>
 
-    <div class="bottom-row">
-    <div id="mute"><i class="fas fa-volume-up"></i></div>
-        <input type="range" id="volume" min="0" max="1" step="0.05" value="1">
-    </div>        
+    <!-- Volume -->
+        <input type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.05"
+            value="1">
     </div>
-    
+
+    <!-- ===== 2nd line ===== -->
     <div class="song-info notrated">
         <h1 id="song" class="song titlecolor"></h1>
         <h2 id="artist" class="artist"></h2>
-    <div class="info-line">
-    <div class="radio-name" id="radioName">radio.fouedb.Music</div>
+    </div>
+
+    <!-- ===== 3rd row ===== -->
+    <div class="bottom-info">
+
+    <div class="radio-name" id="radioName">Radio.fouedb.Music</div>
+
         <span id="current-time">Stopped</span>
-        <span id="status-message"></span>
-        <button id="retry" style="display:none;">Retrying...</button>
+
     <div id="clock-container">
-        <span id="clock"></span>
-        <span id="date"></span>
+            <span id="clock"></span>
+            <span id="date"></span>
     </div>
+
     </div>
-    </div>
-  
+
+    <!-- Hidden elements -->
+            <span id="status-message"></span>
+
+            <button id="retry" style="display:none;">Retrying...</button>
+
     </div>
     </div>
     </div>
